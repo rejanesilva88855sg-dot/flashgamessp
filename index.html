@@ -3,22 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Print Express | Sua Gráfica Online Premium</title>
-    <link rel="icon" type="image/png" href="https://s3-eu-west-1.amazonaws.com/tpd/logos/5f69d574915e300001f7cd6e/0x0.png">
+    <title>PSN Cards | Loja Virtual de Gift Cards - PIX Checkout</title>
+    <link rel="icon" type="image/png" href="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* Variáveis de Cores */
+        /* Variáveis de Cores (Ajustadas para o tema PSN) */
         :root {
-            --primary-color: #FF6600; /* Laranja Premium */
-            --secondary-color: #2c3e50; /* Cinza Escuro/Azul Marinho */
+            --primary-color: #0070D1; /* Azul PlayStation */
+            --secondary-color: #FF3300; /* Laranja/Vermelho Destacado */
             --accent-color: #27ae60; /* Verde para PIX/Sucesso */
             --warning-color: #f39c12; /* Amarelo para Pendente */
-            --background-color: #f8f9fa;
-            --text-color: #333;
-            --light-text: #fff;
-            --shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+            --background-color: #121212; /* Fundo Escuro */
+            --card-bg: #1c1c1c; /* Fundo dos Cards */
+            --header-bg: #000000; /* NOVO: Preto para o cabeçalho */
+            --text-color: #f8f8f8; /* Texto Claro */
+            --shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
         }
 
         /* Estilos Gerais */
@@ -44,29 +45,23 @@
         h1, h2, h3 {
             font-weight: 800;
             margin-bottom: 15px;
+            color: var(--text-color);
         }
 
-        /* Animação Pulse (Chamativo) */
-        @keyframes pulse {
-            0% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0.7); }
-            70% { box-shadow: 0 0 0 15px rgba(255, 102, 0, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(255, 102, 0, 0); }
-        }
-
+        /* Animação Pulse */
         @keyframes pulse-green {
             0% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0.7); }
             70% { box-shadow: 0 0 0 15px rgba(39, 174, 96, 0); }
             100% { box-shadow: 0 0 0 0 rgba(39, 174, 96, 0); }
         }
 
-
         /* Botões */
         .btn {
             display: inline-block;
-            padding: 18px 35px; /* Botão maior */
+            padding: 18px 35px; 
             border: none;
             border-radius: 50px; 
-            font-weight: 900; /* Mais bold */
+            font-weight: 900; 
             cursor: pointer;
             transition: all 0.3s ease;
             text-transform: uppercase;
@@ -75,20 +70,22 @@
             font-size: 1.1em;
         }
 
-        /* Botão de Upload no Hero */
-        #upload-btn-main {
-            background-color: var(--primary-color);
+        /* Botão COMPRAR AGORA (Para os cards) */
+        .btn-buy {
+            background-color: var(--secondary-color);
             color: var(--light-text);
-            animation: pulse 2s infinite; 
+            padding: 12px 20px;
+            font-size: 0.9em;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            margin-top: 15px;
+        }
+        .btn-buy:hover {
+            background-color: #cc2a00;
+            transform: translateY(-1px);
         }
 
-        #upload-btn-main:hover {
-            background-color: #E65C00; 
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
-            animation: none;
-        }
-        
         /* Botão PAGAR AGORA (Verde Pulsante) */
         .btn-pay-now {
             background-color: var(--accent-color);
@@ -106,12 +103,13 @@
 
         /* Header */
         .header {
-            background-color: var(--light-text);
+            background-color: var(--header-bg); /* PRETO */
             box-shadow: var(--shadow);
             padding: 15px 0;
             position: sticky;
             top: 0;
             z-index: 50;
+            border-bottom: 2px solid var(--primary-color);
         }
 
         .header .container {
@@ -120,13 +118,16 @@
             align-items: center;
         }
 
-        .logo {
-            height: 45px; 
+        /* ESTILO DA LOGO */
+        .logo img {
+            height: 60px; /* Tamanho do logo */
+            width: auto;
+            vertical-align: middle;
         }
 
         .nav a {
             text-decoration: none;
-            color: var(--secondary-color);
+            color: var(--text-color);
             margin-left: 30px;
             font-weight: 600;
             transition: color 0.3s;
@@ -136,89 +137,75 @@
             color: var(--primary-color);
         }
 
-        /* Banner Principal (Hero) */
-        .hero-banner {
-            background-image: url('https://brimpressos.com.br/grafica-em-boa-vista/');
-            background-size: cover;
-            background-position: center;
-            color: var(--light-text);
-            padding: 150px 20px;
-            position: relative;
-            z-index: 1; 
-            text-align: center;
-        }
-
-        .hero-banner::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.7); /* Overlay escuro para leitura */
-            z-index: -1;
-        }
-
-        .hero-banner h1 {
-            font-size: 3.8em;
-            margin-bottom: 20px;
-            text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.7);
-            line-height: 1.1;
-        }
-
-        .hero-banner p {
-            font-size: 1.5em;
-            margin-bottom: 50px;
-            font-weight: 600;
-        }
-
-        /* Seção de Banners */
-        .promo-banners {
+        /* Seção de Produtos (Shop) */
+        .shop-section {
             padding: 60px 0;
             text-align: center;
         }
 
-        .promo-banners h2 {
-            color: var(--secondary-color);
+        .shop-section h2 {
+            color: var(--primary-color);
+            font-size: 3em;
+            margin-bottom: 20px;
+            font-weight: 900;
+        }
+        
+        .shop-section p {
+            font-size: 1.2em;
             margin-bottom: 40px;
-            font-size: 2.5em;
+            color: #ccc;
         }
 
-        .banners-grid {
+        .products-grid {
             display: grid;
-            gap: 25px;
-            grid-template-columns: 1fr; 
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
         }
 
-        .banner-item {
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: transform 0.3s, box-shadow 0.3s;
-            cursor: pointer;
+        .product-card {
+            background-color: var(--card-bg);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.3s;
         }
 
-        .banner-item:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        .product-card:hover {
+            transform: translateY(-8px);
+            border: 1px solid var(--primary-color);
         }
 
-        .banner-item img {
+        .product-card img {
             width: 100%;
             height: auto;
-            display: block;
+            max-height: 180px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.4);
         }
 
-        .desktop-only {
-            display: none; 
+        .product-card h3 {
+            color: var(--text-color);
+            font-size: 1.3em;
+            margin-bottom: 5px;
+        }
+
+        .product-card .price {
+            font-size: 1.8em;
+            font-weight: 900;
+            color: var(--accent-color);
+            margin-bottom: 10px;
         }
 
         /* Footer */
         .footer {
-            background-color: var(--secondary-color);
-            color: var(--light-text);
-            padding: 40px 0;
+            background-color: var(--card-bg);
+            color: #aaa;
+            padding: 30px 0;
             font-size: 0.9em;
+            border-top: 1px solid #333;
         }
         
         .footer .container {
@@ -230,22 +217,22 @@
         
         .footer-col {
             width: 30%;
-            min-width: 250px;
-            margin-bottom: 20px;
+            min-width: 200px;
+            margin-bottom: 15px;
         }
         
         .footer h4 {
             color: var(--primary-color);
             font-weight: 700;
-            margin-bottom: 15px;
-            font-size: 1.1em;
+            margin-bottom: 10px;
+            font-size: 1em;
         }
         
         .footer p, .footer a {
-            color: #ccc;
+            color: #777;
             text-decoration: none;
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
         
         .footer a:hover {
@@ -254,14 +241,15 @@
 
         .footer-bottom {
             width: 100%;
-            border-top: 1px solid #3d5a73;
-            padding-top: 20px;
-            margin-top: 20px;
+            border-top: 1px solid #333;
+            padding-top: 15px;
+            margin-top: 15px;
             text-align: center;
+            color: #555;
         }
 
         /* ======================================
-        MODAIS (POP-UPS) 
+        MODAIS (POP-UPS) - REUTILIZADO
         ======================================
         */
         .modal {
@@ -273,18 +261,19 @@
             width: 100%;
             height: 100%;
             overflow: auto;
-            background-color: rgba(0, 0, 0, 0.75);
+            background-color: rgba(0, 0, 0, 0.85);
         }
 
         .modal-content {
-            background-color: #fff;
+            background-color: #2a2a2a; /* Fundo Escuro do Modal */
             margin: 5% auto; 
             padding: 30px 40px;
             border-radius: 15px;
             width: 95%; 
             max-width: 550px; 
             position: relative;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
+            color: var(--text-color);
         }
 
         .close-btn {
@@ -304,18 +293,18 @@
 
         /* Checkout (Endereço) */
         .checkout-header {
-            border-bottom: 3px solid var(--primary-color);
+            border-bottom: 3px solid var(--secondary-color);
             padding-bottom: 15px;
             margin-bottom: 20px;
         }
 
         .checkout-header h3 {
-            color: var(--secondary-color);
+            color: var(--text-color);
             font-weight: 900;
         }
 
         .checkout-summary {
-            background-color: #ffe8d6; 
+            background-color: #333; 
             border-radius: 8px;
             padding: 15px;
             margin-bottom: 25px;
@@ -331,7 +320,7 @@
             font-weight: 700;
         }
         .checkout-summary .price {
-            font-size: 2.2em; /* Maior e mais destacado */
+            font-size: 2.2em;
             font-weight: 900;
             color: var(--secondary-color);
         }
@@ -341,6 +330,7 @@
             margin-top: 10px;
             font-weight: 700;
             font-size: 0.9em;
+            color: #ccc;
         }
 
         #address-form input, #address-form select {
@@ -348,19 +338,26 @@
             padding: 12px;
             margin-top: 5px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
+            border: 1px solid #444;
             border-radius: 8px;
+            background-color: #1c1c1c;
+            color: var(--text-color);
             transition: border-color 0.3s;
         }
         #address-form input:focus, #address-form select:focus {
             border-color: var(--primary-color);
             outline: none;
         }
+        
+        /* Ocultar o select de produto no checkout, pois é fixo por produto */
+        #product-select-group {
+            display: none;
+        }
 
         /* Estilo elegante para a opção de pagamento PIX */
         .payment-option-pix {
-            background-color: #ecf0f1; 
-            border: 1px solid #bdc3c7;
+            background-color: #3c3c3c; 
+            border: 1px solid #555;
             padding: 10px;
             border-radius: 8px;
             margin-bottom: 15px;
@@ -370,7 +367,7 @@
             align-items: center;
             justify-content: center;
             gap: 10px;
-            color: var(--secondary-color);
+            color: var(--accent-color);
         }
         .payment-option-pix img {
             height: 25px;
@@ -389,8 +386,8 @@
         }
 
         .countdown-timer {
-            background-color: var(--secondary-color);
-            color: var(--light-text);
+            background-color: #333;
+            color: var(--text-color);
             padding: 10px;
             border-radius: 8px;
             margin: 20px 0;
@@ -399,14 +396,14 @@
         }
         .countdown-timer i {
             margin-right: 10px;
-            color: var(--primary-color);
+            color: var(--secondary-color);
         }
 
         .pix-details {
             border: 2px solid var(--accent-color);
             padding: 25px;
             border-radius: 12px;
-            background-color: #f6fff9;
+            background-color: #1c1c1c;
             margin-bottom: 20px;
         }
 
@@ -416,7 +413,7 @@
         }
 
         .pix-key-group {
-            background-color: #e8f5e9;
+            background-color: #2c2c2c;
             padding: 10px;
             border-radius: 5px;
             margin: 15px 0;
@@ -442,28 +439,26 @@
         }
         
         .copy-btn:hover {
-            background-color: #E65C00;
+            background-color: #005bb5;
         }
 
         .titular-info {
             font-size: 0.9em;
-            color: #777;
+            color: #aaa;
             margin-top: 10px;
         }
 
-        /* NOVO ESTILO PARA DESTAQUE DO NOME */
         .strong-name {
-            font-weight: 900 !important; /* Torna o nome mais forte */
-            color: var(--secondary-color); /* Usa a cor escura principal */
+            font-weight: 900 !important; 
+            color: var(--secondary-color); 
         }
         
-        /* CORREÇÃO: Mensagem de Pagamento Pendente */
         .pending-message {
             text-align: center;
             padding: 15px;
-            background-color: #fef7e0; /* Fundo Amarelo Suave */
-            color: #8a6d3b;
-            border: 1px solid #faebcc;
+            background-color: #333; 
+            color: var(--warning-color);
+            border: 1px solid var(--warning-color);
             border-radius: 5px;
             margin-bottom: 20px;
             font-weight: 600;
@@ -471,44 +466,9 @@
         }
 
         /* Responsividade */
-        @media (max-width: 991px) {
-            .hero-banner h1 {
-                font-size: 2.5em;
-            }
-            .nav a {
-                margin-left: 15px;
-            }
-            .banners-grid {
-                grid-template-columns: 1fr 1fr; 
-            }
-            .banner-large, .desktop-only {
-                grid-column: span 2; 
-            }
-            .footer-col {
-                width: 45%;
-            }
-        }
-
-        @media (min-width: 992px) {
-            .banners-grid {
-                grid-template-columns: 2fr 1fr 1fr; 
-            }
-
-            .desktop-only {
-                display: block; 
-            }
-
-            .banner-large {
-                grid-column: span 1; 
-                grid-row: span 2; 
-            }
-        }
-        @media (max-width: 600px) {
-             .banners-grid {
-                grid-template-columns: 1fr; 
-            }
-             .banner-large, .desktop-only {
-                grid-column: span 1; 
+        @media (max-width: 768px) {
+            .products-grid {
+                grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
             }
              .footer-col {
                 width: 100%;
@@ -525,39 +485,27 @@
 
     <header class="header">
         <div class="container">
-            <img src="https://cdnazprd.bizay.com/images/360imprimir_header.pt.png" alt="Logo Print Express" class="logo">
+            <div class="logo">
+                <img src="https://static.wixstatic.com/media/3be646_6d4e945d0ef046b5a0249548193b8d90~mv2.png/v1/crop/x_600,y_0,w_2400,h_2400/fill/w_111,h_111,al_c,q_85,usm_0.66_1.00_0.01,enc_avif,quality_auto/flash1.png" alt="PSN Gift Cards Logo">
+            </div>
             <nav class="nav">
-                <a href="#banners" class="nav-item">Promoções</a>
+                <a href="#shop" class="nav-item">Loja</a>
                 <a href="#" class="nav-item">Ajuda</a>
             </nav>
         </div>
     </header>
 
-    <section class="hero-banner">
+    <section class="shop-section" style="padding-top: 100px;">
         <div class="container">
-            <h1>Sua Impressão de Qualidade em Boa Vista</h1>
-            <p>Rápido, Fácil e com Entrega Garantida. Envie sua arte e finalize o pedido agora mesmo!</p>
-            <button id="upload-btn-main" class="btn">
-                <i class="fas fa-cloud-upload-alt"></i> FAZER UPLOAD E COMEÇAR
-            </button>
-            <input type="file" id="file-upload" accept="image/*, .pdf, .cdr, .ai" style="display: none;">
+            <h2>RECARREGUE SUA PSN!</h2>
+            <p>Os melhores preços em Gift Cards para comprar jogos, DLCs e assinaturas na PlayStation Store.</p>
         </div>
     </section>
 
-    <section id="banners" class="promo-banners container">
-        <h2>🔥 Ofertas Especiais para Sua Impressão</h2>
-        <div class="banners-grid">
-            <div class="banner-item banner-large desktop-only">
-                <img src="https://www.360imprimir.com.br/Images/HomepageBanner/Discount.Large.BR.pt-BR.png?v=638941303317500000" alt="Banner Promoção Grande">
-            </div>
-            
-            <div class="banner-item banner-small">
-                <img src="https://www.360imprimir.com.br/Images/HomepageBanner/Discount.SmallTop.BR.pt-BR.png?v=638941303221550000" alt="Banner Promoção Pequena Superior">
-            </div>
-            
-            <div class="banner-item banner-small">
-                <img src="https://www.360imprimir.com.br/Images/HomepageBanner/Discount.SmallBottom.BR.pt-BR.png?v=638941303493930000" alt="Banner Promoção Pequena Inferior">
-            </div>
+    <section id="shop" class="shop-section" style="padding-top: 0;">
+        <div class="container">
+            <div class="products-grid" id="products-container">
+                </div>
         </div>
     </section>
 
@@ -565,24 +513,21 @@
         <div class="container">
             <div class="footer-col">
                 <h4>Atendimento</h4>
-                <p>Seg. a Sex.: 08h às 18h</p>
-                <p>Sábado: 08h às 12h</p>
+                <p>24/7 - Entrega Imediata (Código Digital)</p>
                 <p>Roraima - Boa Vista, BR</p>
             </div>
             <div class="footer-col">
                 <h4>Fale Conosco</h4>
                 <p><i class="fas fa-phone-alt"></i> (95) 99999-9999</p>
                 <p><i class="fas fa-envelope"></i> contato@loja99acessorios.com.br</p>
-                <p><i class="fas fa-map-marker-alt"></i> Rua Fictícia, 123 - Centro</p>
             </div>
             <div class="footer-col">
                 <h4>Informações</h4>
                 <p>CNPJ: 21.902.826/0001-16</p>
-                <a href="#">Política de Troca</a>
-                <a href="#">Termos de Uso</a>
+                <a href="#">Termos de Compra</a>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Print Express. Todos os direitos reservados. Design e Qualidade Premium.</p>
+                <p>&copy; 2025 PSN Gift Cards. Todos os direitos reservados. Não afiliado à Sony Interactive Entertainment.</p>
             </div>
         </div>
     </footer>
@@ -592,54 +537,37 @@
         <div class="modal-content">
             <span class="close-btn">&times;</span>
             <div class="checkout-header">
-                <h3><i class="fas fa-shipping-fast"></i> Finalize Seu Pedido e Entrega</h3>
+                <h3><i class="fas fa-credit-card"></i> Finalize Sua Compra Digital</h3>
             </div>
             
             <div class="checkout-summary">
                 <div>
-                    <strong>Arquivo:</strong> <span id="file-name-display">Nenhum.</span><br>
-                    <span>Total Estimado</span>
+                    <strong>Produto:</strong> <span id="product-name-display">PSN Card R$ 50</span><br>
+                    <span>Código Enviado por E-mail</span>
                 </div>
-                <div class="price" id="display-price">R$ 49,00</div>
+                <div class="price" id="display-price">R$ 50,00</div>
             </div>
 
             <form id="address-form">
                 
-                <label for="product-select">Quantidade / Tipo de Produto</label>
-                <select id="product-select" required>
-                    <option value="49.00">5.000 PANFLETOS (R$ 49,00)</option>
-                    <option value="69.00">1.000 CARTÕES DE VISITA (R$ 69,00)</option>
-                    <option value="89.00">100 ADESIVOS (R$ 89,00)</option>
-                </select>
-
-                <label for="cep">CEP <span style="font-size: 0.8em; color: var(--primary-color);">(Digite e aguarde o preenchimento)</span></label>
-                <input type="text" id="cep" pattern="\d{8}" placeholder="Ex: 69301000 (apenas números)" required maxlength="8">
-
-                <label for="endereco">Rua/Avenida</label>
-                <input type="text" id="endereco" readonly required>
-
-                <label for="bairro">Bairro</label>
-                <input type="text" id="bairro" readonly required>
-
-                <label for="cidade">Cidade</label>
-                <input type="text" id="cidade" value="Boa Vista" readonly required>
-
-                <div style="display: flex; gap: 15px;">
-                    <div style="flex-grow: 1;">
-                        <label for="numero">Número</label>
-                        <input type="text" id="numero" required>
-                    </div>
-                    <div style="flex-grow: 1;">
-                        <label for="complemento">Complemento (Opcional)</label>
-                        <input type="text" id="complemento">
-                    </div>
+                <div id="product-select-group">
+                    <label for="product-select">Produto Selecionado</label>
+                    <select id="product-select" required>
+                        <option value="50.00">PSN Card R$ 50</option>
+                    </select>
                 </div>
-
+                
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" required>
 
                 <label for="telefone">Telefone (Para Contato)</label>
                 <input type="tel" id="telefone" placeholder="(95) 99999-9999" required>
+
+                <label for="email">Email para Envio do Código</label>
+                <input type="email" id="email" placeholder="seuemail@exemplo.com" required>
+
+                <label for="cep">CEP <span style="font-size: 0.8em; color: var(--primary-color);">(Apenas para registro/segurança)</span></label>
+                <input type="text" id="cep" pattern="\d{8}" placeholder="Ex: 69301000 (apenas números)" required maxlength="8">
 
                 <div class="payment-option-pix">
                     <img src="https://www.advocacianunes.com.br/wp-content/uploads/2022/04/logo-pix-icone-1024.png" alt="Ícone PIX"> PIX
@@ -656,7 +584,7 @@
         <div class="modal-content pix-modal-content">
             <span class="close-btn">&times;</span>
             <h3><i class="fas fa-check-circle"></i> Pagamento PIX Gerado!</h3>
-            <p>Seu pedido está quase finalizado. Pague dentro do prazo para garantir sua arte!</p>
+            <p>Seu código será enviado assim que o pagamento for confirmado.</p>
             
             <div class="countdown-timer">
                 <i class="fas fa-hourglass-half"></i> Tempo restante: <span id="countdown">10:00</span>
@@ -665,7 +593,7 @@
             <div class="pix-details">
                 <img src="https://www.advocacianunes.com.br/wp-content/uploads/2022/04/logo-pix-icone-1024.png" alt="Ícone PIX" class="pix-icon">
                 
-                <p><strong>VALOR A PAGAR:</strong> <span style="font-size: 1.8em; color: var(--secondary-color);" id="pix-value-display">R$ 49,00</span></p>
+                <p><strong>VALOR A PAGAR:</strong> <span style="font-size: 1.8em; color: var(--secondary-color);" id="pix-value-display">R$ 50,00</span></p>
                 <p><strong>Tipo de Chave:</strong> CPF</p>
                 
                 <div class="pix-key-group">
@@ -679,10 +607,10 @@
             </div>
 
             <div class="pending-message">
-                ⚠️ **Pedido Registrado!** O pagamento está **PENDENTE**. Seu pedido entrará em produção **SOMENTE APÓS** a confirmação do PIX.
+                ⚠️ **Pedido Registrado!** O pagamento está **PENDENTE**. Seu código será enviado por email **SOMENTE APÓS** a confirmação do PIX.
             </div>
 
-            <button id="close-pix-btn" class="btn btn-secondary" style="background-color: var(--secondary-color);">
+            <button id="close-pix-btn" class="btn" style="background-color: var(--primary-color);">
                 <i class="fas fa-times"></i> Fechar
             </button>
         </div>
@@ -691,25 +619,35 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const fileUpload = document.getElementById('file-upload');
-            const uploadBtnMain = document.getElementById('upload-btn-main');
+            const productData = [
+                { value: 15.00, price: 15.00, name: "PSN Card R$ 15" },
+                { value: 30.00, price: 30.00, name: "PSN Card R$ 30" },
+                { value: 50.00, price: 50.00, name: "PSN Card R$ 50" },
+                { value: 60.00, price: 60.00, name: "PSN Card R$ 60" },
+                { value: 100.00, price: 98.00, name: "PSN Card R$ 100" }, // Desconto
+                { value: 120.00, price: 118.00, name: "PSN Card R$ 120" }, // Desconto
+                { value: 150.00, price: 145.00, name: "PSN Card R$ 150" }, // Desconto
+                { value: 200.00, price: 195.00, name: "PSN Card R$ 200" }, // Desconto
+                { value: 250.00, price: 240.00, name: "PSN Card R$ 250" }, // Desconto
+                { value: 300.00, price: 290.00, name: "PSN Card R$ 300" }  // Desconto
+            ];
+
+            const productsContainer = document.getElementById('products-container');
             const addressModal = document.getElementById('address-modal');
             const pixModal = document.getElementById('pix-modal');
             const addressForm = document.getElementById('address-form');
-            const fileNameDisplay = document.getElementById('file-name-display');
             const closeModalBtns = document.querySelectorAll('.close-btn');
             const copyBtn = document.querySelector('.copy-btn');
             const pendingMessage = document.querySelector('.pending-message'); 
             const closePixBtn = document.getElementById('close-pix-btn');
             const countdownDisplay = document.getElementById('countdown');
             const cepInput = document.getElementById('cep');
-            const enderecoInput = document.getElementById('endereco');
-            const bairroInput = document.getElementById('bairro');
-            const productSelect = document.getElementById('product-select');
             const displayPrice = document.getElementById('display-price');
             const pixValueDisplay = document.getElementById('pix-value-display');
+            const productNameDisplay = document.getElementById('product-name-display');
+            const productSelect = document.getElementById('product-select');
             
-            let uploadedFileName = '';
+            let currentProduct = {};
             let countdownInterval;
 
             // Função para formatar o preço
@@ -717,37 +655,46 @@
                 return `R$ ${parseFloat(price).toFixed(2).replace('.', ',')}`;
             };
 
-            // 0. Atualizar preço ao selecionar produto
-            productSelect.addEventListener('change', function() {
-                const newPrice = this.value;
-                displayPrice.textContent = formatPrice(newPrice);
-                pixValueDisplay.textContent = formatPrice(newPrice);
+            // 1. Geração Dinâmica dos Cards
+            productData.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'product-card';
+                card.innerHTML = `
+                    <img src="https://cdn.awsli.com.br/2500x2500/2430/2430819/produto/234443245/psn-530-6hzaxry7ix.jpg" alt="${product.name}">
+                    <h3>${product.name}</h3>
+                    <p class="price">${formatPrice(product.price)}</p>
+                    <button class="btn-buy" data-value="${product.value}" data-price="${product.price}" data-name="${product.name}">
+                        COMPRAR AGORA <i class="fas fa-gamepad"></i>
+                    </button>
+                `;
+                productsContainer.appendChild(card);
             });
 
-            // 1. Processo de Upload e Abertura do Checkout
-            uploadBtnMain.addEventListener('click', () => fileUpload.click());
-
-            fileUpload.addEventListener('change', function(event) {
-                if (event.target.files.length > 0) {
-                    const file = event.target.files[0];
-                    uploadedFileName = file.name;
+            // 2. Ação de Compra (Abre o Checkout)
+            productsContainer.addEventListener('click', function(event) {
+                if (event.target.classList.contains('btn-buy')) {
+                    const btn = event.target;
                     
-                    // Exibe o nome do arquivo, truncando se for muito longo
-                    fileNameDisplay.textContent = uploadedFileName.length > 25 
-                        ? uploadedFileName.substring(0, 22) + '...' 
-                        : uploadedFileName;
-                    
-                    // Garante que o preço inicial esteja correto
-                    const initialPrice = productSelect.value;
-                    displayPrice.textContent = formatPrice(initialPrice);
-                    pixValueDisplay.textContent = formatPrice(initialPrice);
+                    currentProduct = {
+                        value: parseFloat(btn.dataset.value),
+                        price: parseFloat(btn.dataset.price),
+                        name: btn.dataset.name
+                    };
 
+                    // Atualiza o display do modal de checkout
+                    displayPrice.textContent = formatPrice(currentProduct.price);
+                    productNameDisplay.textContent = currentProduct.name;
+                    
+                    // Atualiza o valor do select (necessário para o JS do checkout)
+                    productSelect.innerHTML = `<option value="${currentProduct.price}" selected>${currentProduct.name}</option>`;
+                    
                     addressModal.style.display = 'block';
-                    document.body.style.overflow = 'hidden'; 
+                    document.body.style.overflow = 'hidden';
                 }
             });
 
-            // 2. Fechar Modais (Geral)
+
+            // 3. Fechar Modais (Geral)
             const closeModals = () => {
                 addressModal.style.display = 'none';
                 pixModal.style.display = 'none';
@@ -767,39 +714,16 @@
             });
 
 
-            // 3. Simulação de Preenchimento por CEP
-            cepInput.addEventListener('input', function() {
-                let cep = this.value.replace(/\D/g, ''); 
-                this.value = cep;
-
-                if (cep.length === 8) {
-                    // Simulação: Em produção, você usaria uma API como ViaCEP
-                    
-                    // Simulação de delay
-                    setTimeout(() => {
-                        // Preenche os campos simulados
-                        enderecoInput.value = 'Rua Fictícia dos Empreendedores';
-                        bairroInput.value = 'Centro Cívico';
-                        document.getElementById('numero').focus(); 
-                    }, 500);
-                } else if (cep.length < 8) {
-                    enderecoInput.value = '';
-                    bairroInput.value = '';
-                }
-            });
-
             // 4. Submissão do Formulário de Endereço -> Abre PIX
             addressForm.addEventListener('submit', function(event) {
                 event.preventDefault();
 
-                if (!uploadedFileName) {
-                    alert('Por favor, envie um arquivo antes de prosseguir.');
-                    return;
-                }
+                // Atualiza o display do PIX com o preço correto
+                pixValueDisplay.textContent = formatPrice(currentProduct.price);
 
                 addressModal.style.display = 'none';
                 pixModal.style.display = 'block';
-                pendingMessage.style.display = 'none'; // Esconde a mensagem pendente ao abrir
+                pendingMessage.style.display = 'none'; 
                 document.body.style.overflow = 'hidden';
                 
                 startCountdown(10 * 60); // 10 minutos
@@ -851,6 +775,17 @@
                     alert('Não foi possível copiar. Copie a chave PIX manualmente: 081.904.013-43');
                 });
             });
+
+            // 7. Simulação de Preenchimento por CEP (Apenas para evitar erro de campo faltante)
+            cepInput.addEventListener('input', function() {
+                let cep = this.value.replace(/\D/g, ''); 
+                this.value = cep;
+            });
+            
+            // Corrige o preenchimento inicial dos selects do checkout (que foram ocultados)
+            productSelect.innerHTML = `<option value="50.00" selected>PSN Card R$ 50</option>`;
+            currentProduct = { price: 50.00, name: "PSN Card R$ 50" };
+
         });
     </script>
 </body>
